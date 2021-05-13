@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class QuizViewController: UIViewController {
+class QuizViewController: UIViewController {
     
     @IBOutlet weak var questionNoLabel: UILabel!
     @IBOutlet weak var questionLabel: UILabel!

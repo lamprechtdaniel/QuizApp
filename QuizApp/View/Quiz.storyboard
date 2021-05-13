@@ -11,7 +11,7 @@
         <!--Quiz View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="QuizViewController" id="Y6W-OH-hqX" customClass="QuizViewController" customModule="QuizApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QuizViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="QuizViewController" customModule="QuizApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,37 +21,37 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hyb-Yo-cdb">
                                         <rect key="frame" x="0.0" y="0.0" width="354" height="140.5"/>
-                                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                                        <color key="backgroundColor" red="0.87058823529411766" green="0.8784313725490196" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                         <state key="normal" title="Answer 1">
-                                            <color key="titleColor" systemColor="systemGray5Color"/>
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="pwr-Hw-RwC">
                                         <rect key="frame" x="0.0" y="150.5" width="354" height="140.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                                        <color key="backgroundColor" red="0.87058823529411766" green="0.8784313725490196" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                         <state key="normal" title="Answer 2">
-                                            <color key="titleColor" systemColor="systemGray5Color"/>
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="5s1-yz-Rri">
                                         <rect key="frame" x="0.0" y="301" width="354" height="140.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                        <color key="backgroundColor" red="0.87058823529411766" green="0.8784313725490196" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                         <state key="normal" title="Answer 3">
-                                            <color key="titleColor" systemColor="systemGray5Color"/>
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="LwH-ux-ZVa">
                                         <rect key="frame" x="0.0" y="451.5" width="354" height="140.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                                        <color key="backgroundColor" red="0.87058823529411766" green="0.8784313725490196" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                         <state key="normal" title="Answer 4">
-                                            <color key="titleColor" systemColor="systemGray5Color"/>
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                 </subviews>
@@ -73,7 +73,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="WSN-pH-Daf" secondAttribute="trailing" constant="8" id="8Tk-TW-5E9"/>
                             <constraint firstItem="IOZ-LC-LHr" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="8" id="D65-Fj-JQB"/>
@@ -88,13 +88,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="firstAnswerButton" destination="hyb-Yo-cdb" id="HCR-AB-RWN"/>
-                        <outlet property="fourthAnswerButton" destination="LwH-ux-ZVa" id="DUC-jX-uQd"/>
-                        <outlet property="questionLabel" destination="WSN-pH-Daf" id="5Ug-c8-AdB"/>
-                        <outlet property="questionNoLabel" destination="IOZ-LC-LHr" id="rtT-LD-nc5"/>
-                        <outlet property="seconAnswerButton" destination="pwr-Hw-RwC" id="FiK-7D-rlD"/>
-                        <outlet property="secondAnswerButton" destination="pwr-Hw-RwC" id="oaj-H6-IvU"/>
-                        <outlet property="thirdAnswerButton" destination="5s1-yz-Rri" id="bnn-m3-2as"/>
+                        <outlet property="firstAnswerButton" destination="hyb-Yo-cdb" id="0DI-0m-t3b"/>
+                        <outlet property="fourthAnswerButton" destination="LwH-ux-ZVa" id="0RL-sW-SLw"/>
+                        <outlet property="questionLabel" destination="WSN-pH-Daf" id="0dp-zu-FCy"/>
+                        <outlet property="questionNoLabel" destination="IOZ-LC-LHr" id="vTx-hS-oOJ"/>
+                        <outlet property="secondAnswerButton" destination="pwr-Hw-RwC" id="lSX-JG-zTj"/>
+                        <outlet property="thirdAnswerButton" destination="5s1-yz-Rri" id="ONm-5y-xUs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -196,15 +195,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
