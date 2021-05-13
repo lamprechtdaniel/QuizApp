@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Answer: Codable {
+public struct Answer: Codable {
     let id: Int
     let text: String
     let isCorrect: Bool

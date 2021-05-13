@@ -26,8 +26,11 @@
                                         <state key="normal" title="Answer 1">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="onAnswerTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="nNJ-1J-Mmj"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="pwr-Hw-RwC">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="pwr-Hw-RwC">
                                         <rect key="frame" x="0.0" y="150.5" width="354" height="140.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.87058823529411766" green="0.8784313725490196" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -35,8 +38,11 @@
                                         <state key="normal" title="Answer 2">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="onAnswerTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="B6B-2j-z6w"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="5s1-yz-Rri">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="5s1-yz-Rri">
                                         <rect key="frame" x="0.0" y="301" width="354" height="140.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.87058823529411766" green="0.8784313725490196" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -44,8 +50,11 @@
                                         <state key="normal" title="Answer 3">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="onAnswerTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="r68-Sy-cH7"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="LwH-ux-ZVa">
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="LwH-ux-ZVa">
                                         <rect key="frame" x="0.0" y="451.5" width="354" height="140.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.87058823529411766" green="0.8784313725490196" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -53,6 +62,9 @@
                                         <state key="normal" title="Answer 4">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="onAnswerTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="4re-9F-SRf"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -103,7 +115,7 @@
         <!--Score View Controller-->
         <scene sceneID="Mp3-jP-ZiX">
             <objects>
-                <viewController id="Gex-fH-7y7" customClass="ScoreViewController" customModule="QuizApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScoreViewController" modalPresentationStyle="fullScreen" id="Gex-fH-7y7" customClass="ScoreViewController" customModule="QuizApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qdn-lt-rOC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -154,7 +166,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3ZD-me-av4">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3ZD-me-av4">
                                 <rect key="frame" x="30" y="278" width="354" height="568"/>
                             </stackView>
                         </subviews>
@@ -182,7 +194,9 @@
                             <constraint firstItem="F5X-0c-nug" firstAttribute="leading" secondItem="2yK-yb-Frb" secondAttribute="leading" constant="30" id="pAc-u5-i4M"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="PQh-At-KmM"/>
                     <connections>
+                        <outlet property="leaderboardStackView" destination="3ZD-me-av4" id="cEL-sL-adI"/>
                         <outlet property="rankingLabel" destination="BB9-91-SC3" id="tqm-MX-Hhl"/>
                         <outlet property="scoreLabel" destination="hUb-Lb-OYp" id="LrL-4Y-fmU"/>
                     </connections>

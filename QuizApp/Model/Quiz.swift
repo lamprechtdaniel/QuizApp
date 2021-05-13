@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Quiz: Codable {
+public struct Quiz: Codable {
     let id:Int
     let title:String
     let lernstoff:String

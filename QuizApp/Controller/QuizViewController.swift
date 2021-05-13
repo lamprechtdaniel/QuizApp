@@ -10,6 +10,8 @@ import UIKit
 
 class QuizViewController: UIViewController {
     
+    private let scoreViewController = ScoreViewController()
+    
     @IBOutlet weak var questionNoLabel: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var firstAnswerButton: UIButton!
@@ -18,24 +20,23 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var fourthAnswerButton: UIButton!
     
     private var buttons: [UIButton]?
-    private static var questionNo: Int = 1
-    private static var maxQuestionNo: Int = 10
-//    private var question: Question?
-//    private var answers: [Answer]?
-    
+    private var maxQuestionNo: Int?
+    private var quiz: Quiz?
+    private var correctAnswer: Int?
+    private var selectedAnswer: Int?
+    private var score: Int = 0
+    private var questionNo: Int = 1 {
+        didSet {
+            moveForward()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         buttons = [firstAnswerButton, secondAnswerButton, thirdAnswerButton, fourthAnswerButton]
         styleUI()
-//        fetchData()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+        fetchQuiz()
     }
     
     private func styleUI() {
@@ -45,20 +46,78 @@ class QuizViewController: UIViewController {
         }
     }
     
-//    private func fetchData() {
-//        guard let question = question, let answers = answers else { return }
-//        questionNoLabel.text = "Question \(questionNo) of \(maxQuestionNo)"
-//        questionLabel.text = question
-//        var count = 0
-//        for answer in answers {
-//            buttons[count].text = answer
-//            count += 1
-//        }
-//    }
-}
-
-extension UIButton {
-    public func setupCornerRadius(cornerRadius: CGFloat) {
-        self.layer.cornerRadius = cornerRadius
+    private func fetchQuiz() {
+        quiz = quizData
+        maxQuestionNo = quiz?.questions.count ?? 0
+        
+        fetchQuestion()
+    }
+    
+    private func fetchQuestion() {
+        guard let quiz = quiz,
+              let maxQuestionNo = maxQuestionNo,
+              let buttons = buttons
+        else { return }
+        if questionNo-1 >= quiz.questions.count {
+//            performSegue(withIdentifier: "showScoreView", sender: nil)
+            
+//            let scoreViewController = ScoreViewController()
+//            scoreViewController.score = score
+//            self.present(scoreViewController, animated: true, completion: nil)
+            
+            let storyboard = UIStoryboard(name: "Quiz", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ScoreViewController") as! ScoreViewController
+            vc.score = score
+            self.present(vc, animated: true)
+            return
+        }
+        
+        if let selectedAnswer = selectedAnswer, let correctAnswer = correctAnswer {
+            buttons[selectedAnswer].layer.borderWidth = 0
+            buttons[selectedAnswer].backgroundColor = UIColor(hexString: "DEE0E4", alpha: 1.00)
+            buttons[correctAnswer].backgroundColor = UIColor(hexString: "DEE0E4", alpha: 1.00)
+        }
+        
+        for button in buttons {
+            button.isUserInteractionEnabled = true
+        }
+        
+        questionNoLabel.text = "Question \(questionNo) of \(maxQuestionNo)"
+        questionLabel.text = quiz.questions[questionNo-1].question
+        var count = 0
+        for answer in quiz.questions[questionNo-1].answers {
+            buttons[count].setTitle(answer.text, for: .normal)
+            if answer.isCorrect { correctAnswer = count }
+            count += 1
+        }
+    }
+    
+    private func moveForward() {
+        fetchQuestion()
+    }
+    
+    @IBAction func onAnswerTap(_ sender: UIButton) {
+        guard let correctAnswer = correctAnswer, let buttons = buttons else { return }
+        
+        selectedAnswer = sender.tag
+        
+        if selectedAnswer == correctAnswer {
+            buttons[sender.tag].layer.borderWidth = 3
+            buttons[sender.tag].layer.borderColor = UIColor.green.cgColor
+            buttons[sender.tag].backgroundColor = UIColor.green.withAlphaComponent(0.2)
+            score += 1
+        } else {
+            buttons[sender.tag].layer.borderWidth = 3
+            buttons[sender.tag].layer.borderColor = UIColor.red.cgColor
+            buttons[correctAnswer].backgroundColor = UIColor.green.withAlphaComponent(0.2)
+        }
+        
+        for button in buttons {
+            button.isUserInteractionEnabled = false
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.questionNo += 1
+        }
     }
 }
