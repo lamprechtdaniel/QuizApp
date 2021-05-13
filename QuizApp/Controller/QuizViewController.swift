@@ -8,32 +8,9 @@
 import Foundation
 import UIKit
 
-private var quizData: Quiz = Quiz(
-    id: 1,
-    lernstoff: "tua lei brav lernen bua",
-    questions: [
-        Question(id: 1, question: "Question 1", answers: [
-            Answer(id: 1, text: "Answer 1-1", isCorrect: false),
-            Answer(id: 1, text: "Answer 1-2", isCorrect: true),
-            Answer(id: 1, text: "Answer 1-3", isCorrect: false),
-            Answer(id: 1, text: "Answer 1-4", isCorrect: false),
-        ]),
-        Question(id: 2, question: "Question 2", answers: [
-            Answer(id: 1, text: "Answer 2-1", isCorrect: true),
-            Answer(id: 2, text: "Answer 2-2", isCorrect: false),
-            Answer(id: 3, text: "Answer 2-3", isCorrect: false),
-            Answer(id: 4, text: "Answer 2-4", isCorrect: false),
-        ]),
-        Question(id: 3, question: "Question 3", answers: [
-            Answer(id: 1, text: "Answer 3-1", isCorrect: false),
-            Answer(id: 2, text: "Answer 3-2", isCorrect: false),
-            Answer(id: 3, text: "Answer 3-3", isCorrect: false),
-            Answer(id: 4, text: "Answer 3-4", isCorrect: true),
-        ])
-    ]
-)
-
 class QuizViewController: UIViewController {
+    
+    private let scoreViewController = ScoreViewController()
     
     @IBOutlet weak var questionNoLabel: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
@@ -47,6 +24,7 @@ class QuizViewController: UIViewController {
     private var quiz: Quiz?
     private var correctAnswer: Int?
     private var selectedAnswer: Int?
+    private var score: Int = 0
     private var questionNo: Int = 1 {
         didSet {
             moveForward()
@@ -81,7 +59,16 @@ class QuizViewController: UIViewController {
               let buttons = buttons
         else { return }
         if questionNo-1 >= quiz.questions.count {
-            // TODO: replace with move to scoreview
+//            performSegue(withIdentifier: "showScoreView", sender: nil)
+            
+//            let scoreViewController = ScoreViewController()
+//            scoreViewController.score = score
+//            self.present(scoreViewController, animated: true, completion: nil)
+            
+            let storyboard = UIStoryboard(name: "Quiz", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ScoreViewController") as! ScoreViewController
+            vc.score = score
+            self.present(vc, animated: true)
             return
         }
         
@@ -89,6 +76,10 @@ class QuizViewController: UIViewController {
             buttons[selectedAnswer].layer.borderWidth = 0
             buttons[selectedAnswer].backgroundColor = UIColor(hexString: "DEE0E4", alpha: 1.00)
             buttons[correctAnswer].backgroundColor = UIColor(hexString: "DEE0E4", alpha: 1.00)
+        }
+        
+        for button in buttons {
+            button.isUserInteractionEnabled = true
         }
         
         questionNoLabel.text = "Question \(questionNo) of \(maxQuestionNo)"
@@ -114,10 +105,15 @@ class QuizViewController: UIViewController {
             buttons[sender.tag].layer.borderWidth = 3
             buttons[sender.tag].layer.borderColor = UIColor.green.cgColor
             buttons[sender.tag].backgroundColor = UIColor.green.withAlphaComponent(0.2)
+            score += 1
         } else {
             buttons[sender.tag].layer.borderWidth = 3
             buttons[sender.tag].layer.borderColor = UIColor.red.cgColor
             buttons[correctAnswer].backgroundColor = UIColor.green.withAlphaComponent(0.2)
+        }
+        
+        for button in buttons {
+            button.isUserInteractionEnabled = false
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {

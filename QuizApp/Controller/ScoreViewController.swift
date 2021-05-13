@@ -8,25 +8,36 @@
 import Foundation
 import UIKit
 
-final class ScoreViewController: UIViewController {
+
+
+class ScoreViewController: UIViewController {
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var rankingLabel: UILabel!
+    @IBOutlet weak var leaderboardStackView: UIStackView!
+    
+    public var score: Int?
+    public var scores: [Score]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         styleUI()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+        fetchData()
     }
     
     private func styleUI() {
         
+    }
+    
+    private func fetchData() {
+        scores = scoreData
+        
+        guard let score = score, var scores = scores else { return }
+        
+        scoreLabel.text = String(score)
+        
+        scores.sort {
+            $0.points > $1.points
+        }
     }
 }
