@@ -9,7 +9,15 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    static var storedUserName: String? {
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "AppQuiz.username")
+        }
+        get {
+            UserDefaults.standard.string(forKey: "AppQuiz.username")
+        }
+    }
+    
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

@@ -9,6 +9,7 @@ import Foundation
 
 struct Quiz: Codable {
     let id:Int
+    let title:String
     let lernstoff:String
     let questions:[Question]
 }

@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         self.window?.windowScene = windowScene
         // Set custom ViewController as root
-        let initVC = UIStoryboard.init(name: "Quiz", bundle: nil).instantiateViewController(identifier: "QuizViewController")
+        let initVC = UIStoryboard.init(name: "Start", bundle: nil).instantiateViewController(identifier: "StartScreenViewController")
         window?.rootViewController = initVC
         window?.makeKeyAndVisible()
     }

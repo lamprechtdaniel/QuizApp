@@ -51,6 +51,22 @@ class SyncManager {
                     completion(.failure(error as! SyncManager.Error, quizzesFromStorage))
                 }
             }
+        } else {
+            var dummyQuizzes = [Quiz]()
+            var dummyQuestions = [Question]()
+            
+            var dummyAnswers = [Answer]()
+            dummyAnswers.append(Answer(id: 1, text: "fix des", isCorrect: true))
+            dummyAnswers.append(Answer(id: 2, text: "fix net", isCorrect: false))
+            dummyAnswers.append(Answer(id: 3, text: "fix nö", isCorrect: false))
+            dummyAnswers.append(Answer(id: 4, text: "fix nana", isCorrect: false))
+
+            dummyQuestions.append(Question(id: 1, question: "hehe 1. Frage", answers: dummyAnswers))
+            
+            dummyQuizzes.append(Quiz(id: 1, title: "myQuiz", lernstoff: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.", questions: dummyQuestions))
+            
+            
+            completion(.failure(.syncFailed, dummyQuizzes))
         }
     }
 
