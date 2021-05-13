@@ -7,9 +7,8 @@
 
 import Foundation
 
-class Quiz: Fetchable {
-    
-    static var items: [Quiz] = []
-    
-    var questions: [Question]
+struct Quiz: Codable {
+    let id:Int
+    let lernstoff:String
+    let questions:[Question]
 }
