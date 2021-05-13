@@ -13,6 +13,13 @@
 		659812CF264D15E7006CA423 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 659812CD264D15E7006CA423 /* Main.storyboard */; };
 		659812D1264D15E8006CA423 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 659812D0264D15E8006CA423 /* Assets.xcassets */; };
 		659812D4264D15E8006CA423 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 659812D2264D15E8006CA423 /* LaunchScreen.storyboard */; };
+		CCB0E92D264D2BD800E8FAE6 /* Fetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB0E92C264D2BD800E8FAE6 /* Fetchable.swift */; };
+		CCB0E92F264D2BFD00E8FAE6 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB0E92E264D2BFD00E8FAE6 /* SyncManager.swift */; };
+		CCB0E935264D2C3700E8FAE6 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB0E934264D2C3700E8FAE6 /* Quiz.swift */; };
+		CCB0E937264D2C3D00E8FAE6 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB0E936264D2C3D00E8FAE6 /* Answer.swift */; };
+		CCB0E939264D2C4300E8FAE6 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB0E938264D2C4300E8FAE6 /* Question.swift */; };
+		CCB0E93C264D303200E8FAE6 /* Quiz.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCB0E93B264D303200E8FAE6 /* Quiz.storyboard */; };
+		CCB0E93E264D305900E8FAE6 /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCB0E93D264D305900E8FAE6 /* Start.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,8 +31,13 @@
 		659812D0264D15E8006CA423 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		659812D3264D15E8006CA423 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		659812D5264D15E8006CA423 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CC400506264D28F70004C1AA /* Controller */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Controller; path = /Users/mathiasgsell/Documents/Developer/projects/swift/QuizApp/QuizApp/Controller; sourceTree = "<absolute>"; };
-		CC400507264D28F70004C1AA /* Model */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Model; path = /Users/mathiasgsell/Documents/Developer/projects/swift/QuizApp/QuizApp/Model; sourceTree = "<absolute>"; };
+		CCB0E92C264D2BD800E8FAE6 /* Fetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetchable.swift; sourceTree = "<group>"; };
+		CCB0E92E264D2BFD00E8FAE6 /* SyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
+		CCB0E934264D2C3700E8FAE6 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
+		CCB0E936264D2C3D00E8FAE6 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
+		CCB0E938264D2C4300E8FAE6 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		CCB0E93B264D303200E8FAE6 /* Quiz.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Quiz.storyboard; sourceTree = "<group>"; };
+		CCB0E93D264D305900E8FAE6 /* Start.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Start.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +70,9 @@
 		659812C6264D15E7006CA423 /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
-				CC400506264D28F70004C1AA /* Controller */,
-				CC400507264D28F70004C1AA /* Model */,
+				CCB0E93A264D302200E8FAE6 /* View */,
+				CCB0E931264D2C1900E8FAE6 /* Controller */,
+				CCB0E930264D2C1200E8FAE6 /* Model */,
 				659812C7264D15E7006CA423 /* AppDelegate.swift */,
 				659812C9264D15E7006CA423 /* SceneDelegate.swift */,
 				659812CB264D15E7006CA423 /* ViewController.swift */,
@@ -69,6 +82,34 @@
 				659812D5264D15E8006CA423 /* Info.plist */,
 			);
 			path = QuizApp;
+			sourceTree = "<group>";
+		};
+		CCB0E930264D2C1200E8FAE6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CCB0E934264D2C3700E8FAE6 /* Quiz.swift */,
+				CCB0E938264D2C4300E8FAE6 /* Question.swift */,
+				CCB0E936264D2C3D00E8FAE6 /* Answer.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CCB0E931264D2C1900E8FAE6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CCB0E92E264D2BFD00E8FAE6 /* SyncManager.swift */,
+				CCB0E92C264D2BD800E8FAE6 /* Fetchable.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CCB0E93A264D302200E8FAE6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CCB0E93B264D303200E8FAE6 /* Quiz.storyboard */,
+				CCB0E93D264D305900E8FAE6 /* Start.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,6 +170,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				659812D4264D15E8006CA423 /* LaunchScreen.storyboard in Resources */,
+				CCB0E93C264D303200E8FAE6 /* Quiz.storyboard in Resources */,
+				CCB0E93E264D305900E8FAE6 /* Start.storyboard in Resources */,
 				659812D1264D15E8006CA423 /* Assets.xcassets in Resources */,
 				659812CF264D15E7006CA423 /* Main.storyboard in Resources */,
 			);
@@ -141,6 +184,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCB0E92D264D2BD800E8FAE6 /* Fetchable.swift in Sources */,
+				CCB0E939264D2C4300E8FAE6 /* Question.swift in Sources */,
+				CCB0E92F264D2BFD00E8FAE6 /* SyncManager.swift in Sources */,
+				CCB0E935264D2C3700E8FAE6 /* Quiz.swift in Sources */,
+				CCB0E937264D2C3D00E8FAE6 /* Answer.swift in Sources */,
 				659812CC264D15E7006CA423 /* ViewController.swift in Sources */,
 				659812C8264D15E7006CA423 /* AppDelegate.swift in Sources */,
 				659812CA264D15E7006CA423 /* SceneDelegate.swift in Sources */,

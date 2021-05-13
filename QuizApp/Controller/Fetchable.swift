@@ -6,7 +6,7 @@
 //
 import Foundation
 
-class Fetchable {
+class Fetchable: Codable {
     enum Error: Swift.Error {
             case fileAlreadyExists
             case invalidDirectory
@@ -16,11 +16,19 @@ class Fetchable {
     
     var id: Int?
     var apiUrl: URL?
+    let fileManager = FileManager()
     
     var type: String {
         return String(describing: self)
     }
-    let fileManager = FileManager()
+
+    required init(from decoder: Decoder) throws {
+        <#code#>
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        <#code#>
+    }
     
     
     func saveToFile(data:Data) throws {

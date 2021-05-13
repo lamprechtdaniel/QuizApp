@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+class Quiz: Fetchable {
+    
+    static var items: [Quiz] = []
+    
+    var questions: [Question]
+}
