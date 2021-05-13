@@ -2,12 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/mathiasgsell/Documents/Developer/projects/swift/QuizApp/QuizApp/Controller">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/mathiasgsell/Documents/Developer/projects/swift/QuizApp/QuizApp/Model">
-   </FileRef>
-   <FileRef
       location = "self:">
    </FileRef>
 </Workspace>
