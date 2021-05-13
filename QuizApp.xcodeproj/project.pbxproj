@@ -24,6 +24,8 @@
 		659812D0264D15E8006CA423 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		659812D3264D15E8006CA423 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		659812D5264D15E8006CA423 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC400506264D28F70004C1AA /* Controller */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Controller; path = /Users/mathiasgsell/Documents/Developer/projects/swift/QuizApp/QuizApp/Controller; sourceTree = "<absolute>"; };
+		CC400507264D28F70004C1AA /* Model */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Model; path = /Users/mathiasgsell/Documents/Developer/projects/swift/QuizApp/QuizApp/Model; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,8 @@
 		659812C6264D15E7006CA423 /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
+				CC400506264D28F70004C1AA /* Controller */,
+				CC400507264D28F70004C1AA /* Model */,
 				659812C7264D15E7006CA423 /* AppDelegate.swift */,
 				659812C9264D15E7006CA423 /* SceneDelegate.swift */,
 				659812CB264D15E7006CA423 /* ViewController.swift */,
