@@ -13,6 +13,10 @@
 		659812CA264D15E7006CA423 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659812C9264D15E7006CA423 /* SceneDelegate.swift */; };
 		659812D1264D15E8006CA423 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 659812D0264D15E8006CA423 /* Assets.xcassets */; };
 		659812D4264D15E8006CA423 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 659812D2264D15E8006CA423 /* LaunchScreen.storyboard */; };
+		65AE2093264DC2AC001C4B05 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AE208F264DC2AC001C4B05 /* Data.swift */; };
+		65AE2094264DC2AC001C4B05 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AE2091264DC2AC001C4B05 /* UIColor+Extension.swift */; };
+		65AE2095264DC2AC001C4B05 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AE2092264DC2AC001C4B05 /* UIButton+Extension.swift */; };
+		65AE2097264DC2DF001C4B05 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AE2096264DC2DF001C4B05 /* Score.swift */; };
 		CCB0E92F264D2BFD00E8FAE6 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB0E92E264D2BFD00E8FAE6 /* SyncManager.swift */; };
 		CCB0E935264D2C3700E8FAE6 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB0E934264D2C3700E8FAE6 /* Quiz.swift */; };
 		CCB0E937264D2C3D00E8FAE6 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB0E936264D2C3D00E8FAE6 /* Answer.swift */; };
@@ -33,6 +37,10 @@
 		659812D0264D15E8006CA423 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		659812D3264D15E8006CA423 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		659812D5264D15E8006CA423 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65AE208F264DC2AC001C4B05 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		65AE2091264DC2AC001C4B05 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		65AE2092264DC2AC001C4B05 /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		65AE2096264DC2DF001C4B05 /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		CCB0E92E264D2BFD00E8FAE6 /* SyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
 		CCB0E934264D2C3700E8FAE6 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
 		CCB0E936264D2C3D00E8FAE6 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
@@ -76,6 +84,8 @@
 		659812C6264D15E7006CA423 /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
+				65AE208E264DC2AC001C4B05 /* DataHelper */,
+				65AE2090264DC2AC001C4B05 /* Extensions */,
 				CCB0E93A264D302200E8FAE6 /* View */,
 				CCB0E931264D2C1900E8FAE6 /* Controller */,
 				CCB0E930264D2C1200E8FAE6 /* Model */,
@@ -88,9 +98,27 @@
 			path = QuizApp;
 			sourceTree = "<group>";
 		};
+		65AE208E264DC2AC001C4B05 /* DataHelper */ = {
+			isa = PBXGroup;
+			children = (
+				65AE208F264DC2AC001C4B05 /* Data.swift */,
+			);
+			path = DataHelper;
+			sourceTree = "<group>";
+		};
+		65AE2090264DC2AC001C4B05 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				65AE2091264DC2AC001C4B05 /* UIColor+Extension.swift */,
+				65AE2092264DC2AC001C4B05 /* UIButton+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		CCB0E930264D2C1200E8FAE6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				65AE2096264DC2DF001C4B05 /* Score.swift */,
 				CCB0E934264D2C3700E8FAE6 /* Quiz.swift */,
 				CCB0E938264D2C4300E8FAE6 /* Question.swift */,
 				CCB0E936264D2C3D00E8FAE6 /* Answer.swift */,
@@ -193,13 +221,17 @@
 				CCB0E92F264D2BFD00E8FAE6 /* SyncManager.swift in Sources */,
 				CCB0E942264D870500E8FAE6 /* QuizListTableViewController.swift in Sources */,
 				CCB0E935264D2C3700E8FAE6 /* Quiz.swift in Sources */,
+				65AE2097264DC2DF001C4B05 /* Score.swift in Sources */,
 				CCB0E940264D6F8000E8FAE6 /* StartScreenViewController.swift in Sources */,
 				CCB0E937264D2C3D00E8FAE6 /* Answer.swift in Sources */,
 				CCDC5207264D9CB000875F5E /* QuizDetailViewController.swift in Sources */,
+				65AE2093264DC2AC001C4B05 /* Data.swift in Sources */,
 				6516F2A1264D333F00C011E5 /* QuizViewController.swift in Sources */,
 				6516F2A3264D4BAE00C011E5 /* ScoreViewController.swift in Sources */,
+				65AE2094264DC2AC001C4B05 /* UIColor+Extension.swift in Sources */,
 				659812C8264D15E7006CA423 /* AppDelegate.swift in Sources */,
 				659812CA264D15E7006CA423 /* SceneDelegate.swift in Sources */,
+				65AE2095264DC2AC001C4B05 /* UIButton+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

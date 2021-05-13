@@ -9,6 +9,7 @@ import Foundation
 
 public var quizData: Quiz = Quiz(
     id: 1,
+    title: "Quiz 1",
     lernstoff: "tua lei brav lernen bua",
     questions: [
         Question(id: 1, question: "Question 1", answers: [
