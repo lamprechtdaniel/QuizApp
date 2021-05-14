@@ -19,6 +19,7 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var thirdAnswerButton: UIButton!
     @IBOutlet weak var fourthAnswerButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var jokerButton: UIButton!
     
     private var buttons: [UIButton]?
     private var maxQuestionNo: Int?
@@ -26,10 +27,18 @@ class QuizViewController: UIViewController {
     private var correctAnswer: Int?
     private var selectedAnswer: Int?
     private var score: Int = 0
-    private var goingForwards = false
     private var questionNo: Int = 1 {
         didSet {
             moveForward()
+        }
+    }
+    private var jokerUsed = false {
+        didSet {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.jokerButton.alpha = 0
+            }, completion: { completed in
+                self.jokerButton.isEnabled = false
+            })
         }
     }
     
@@ -68,14 +77,10 @@ class QuizViewController: UIViewController {
             return
         }
         
-        if let selectedAnswer = selectedAnswer, let correctAnswer = correctAnswer {
-            buttons[selectedAnswer].layer.borderWidth = 0
-            buttons[selectedAnswer].backgroundColor = UIColor(hexString: "DEE0E4", alpha: 1.00)
-            buttons[correctAnswer].backgroundColor = UIColor(hexString: "DEE0E4", alpha: 1.00)
-        }
-        
         for button in buttons {
+            button.layer.borderWidth = 0
             button.isUserInteractionEnabled = true
+            button.backgroundColor = UIColor(hexString: "DEE0E4", alpha: 1.00)
         }
         
         questionNoLabel.text = "Question \(questionNo) of \(maxQuestionNo)"
@@ -101,7 +106,6 @@ class QuizViewController: UIViewController {
     @IBAction func onAnswerTap(_ sender: UIButton) {
         guard let correctAnswer = correctAnswer, let buttons = buttons else { return }
         
-        goingForwards = true
         selectedAnswer = sender.tag
         
         if selectedAnswer == correctAnswer {
@@ -138,5 +142,23 @@ class QuizViewController: UIViewController {
         if let nc = self.navigationController, let quizListVC = nc.viewControllers.filter({ $0 is QuizListTableViewController }).first {
             nc.popToViewController(quizListVC, animated: animated)
         }
+    }
+    
+    @IBAction func onJokerTap(_ sender: UIButton) {
+        jokerUsed = true
+        
+        guard let quiz = quiz, let buttons = buttons else { return }
+        let incorrectAnswers = quiz.questions[questionNo-1].answers.filter { $0.isCorrect == false }
+        let pickedIncorrectAnswers = incorrectAnswers[randomPick: 2]
+        _ = buttons.filter({ (button: UIButton) -> Bool in
+            return pickedIncorrectAnswers.contains(where: { (answer: Answer) -> Bool in
+                return answer.text == button.title(for: .normal)
+            })
+        }).map({ button in
+            button.isUserInteractionEnabled = false
+            UIView.animate(withDuration: 0.5, animations: {
+                button.backgroundColor = UIColor(hexString: "DEE0E4", alpha: 0.3)
+            })
+        })
     }
 }
