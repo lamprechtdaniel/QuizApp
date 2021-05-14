@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="OdF-3r-eBF">
-                                <rect key="frame" x="30" y="250" width="354" height="592"/>
+                                <rect key="frame" x="30" y="210" width="354" height="592"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hyb-Yo-cdb">
                                         <rect key="frame" x="0.0" y="0.0" width="354" height="140.5"/>
@@ -76,18 +76,33 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a question?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WSN-pH-Daf">
-                                <rect key="frame" x="8" y="92" width="398" height="150"/>
+                                <rect key="frame" x="8" y="92" width="398" height="110"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="cpe-xO-5KY"/>
+                                    <constraint firstAttribute="height" constant="110" id="cpe-xO-5KY"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFL-gK-4mk">
+                                <rect key="frame" x="90" y="840" width="234" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.1105628759" blue="0.073140390220000004" alpha="0.85174697977028146" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Qyv-XS-oUG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <state key="normal" title="Quiz beenden">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCancelTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="nTe-Vu-iFs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="XFL-gK-4mk" secondAttribute="trailing" constant="90" id="0C2-Cf-7wr"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="WSN-pH-Daf" secondAttribute="trailing" constant="8" id="8Tk-TW-5E9"/>
                             <constraint firstItem="IOZ-LC-LHr" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="8" id="D65-Fj-JQB"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="IOZ-LC-LHr" secondAttribute="trailing" constant="8" id="IT6-fx-mmA"/>
@@ -95,12 +110,15 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="OdF-3r-eBF" secondAttribute="trailing" constant="30" id="Smg-Mc-RYP"/>
                             <constraint firstItem="WSN-pH-Daf" firstAttribute="top" secondItem="IOZ-LC-LHr" secondAttribute="bottom" constant="8" id="To8-sh-CWq"/>
                             <constraint firstItem="OdF-3r-eBF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="eGQ-rD-DOY"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="OdF-3r-eBF" secondAttribute="bottom" constant="20" id="lhH-k2-igz"/>
+                            <constraint firstItem="XFL-gK-4mk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="90" id="fWf-Hi-ECS"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="OdF-3r-eBF" secondAttribute="bottom" constant="60" id="lhH-k2-igz"/>
+                            <constraint firstItem="XFL-gK-4mk" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="8" id="sT6-uL-erP"/>
                             <constraint firstItem="IOZ-LC-LHr" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="udg-yY-PFt"/>
                             <constraint firstItem="WSN-pH-Daf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="xgW-CF-MYH"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="XFL-gK-4mk" id="nvg-N2-PId"/>
                         <outlet property="firstAnswerButton" destination="hyb-Yo-cdb" id="0DI-0m-t3b"/>
                         <outlet property="fourthAnswerButton" destination="LwH-ux-ZVa" id="0RL-sW-SLw"/>
                         <outlet property="questionLabel" destination="WSN-pH-Daf" id="0dp-zu-FCy"/>

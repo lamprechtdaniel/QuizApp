@@ -18,6 +18,7 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var secondAnswerButton: UIButton!
     @IBOutlet weak var thirdAnswerButton: UIButton!
     @IBOutlet weak var fourthAnswerButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     private var buttons: [UIButton]?
     private var maxQuestionNo: Int?
@@ -25,6 +26,7 @@ class QuizViewController: UIViewController {
     private var correctAnswer: Int?
     private var selectedAnswer: Int?
     private var score: Int = 0
+    private var goingForwards = false
     private var questionNo: Int = 1 {
         didSet {
             moveForward()
@@ -44,6 +46,8 @@ class QuizViewController: UIViewController {
         for button in buttons {
             button.setupCornerRadius(cornerRadius: 20)
         }
+        cancelButton.layer.cornerRadius = 8
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     private func fetchQuiz() {
@@ -59,9 +63,7 @@ class QuizViewController: UIViewController {
               let buttons = buttons
         else { return }
         if questionNo-1 >= quiz.questions.count {
-            if let nc = navigationController, let quizListVC = nc.viewControllers.filter({ $0 is QuizListTableViewController }).first {
-                nc.popToViewController(quizListVC, animated: false)
-            }
+            moveToQuizList()
             performSegue(withIdentifier: "showLeaderboard", sender: nil)
             return
         }
@@ -99,6 +101,7 @@ class QuizViewController: UIViewController {
     @IBAction func onAnswerTap(_ sender: UIButton) {
         guard let correctAnswer = correctAnswer, let buttons = buttons else { return }
         
+        goingForwards = true
         selectedAnswer = sender.tag
         
         if selectedAnswer == correctAnswer {
@@ -118,6 +121,22 @@ class QuizViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.questionNo += 1
+        }
+    }
+    @IBAction func onCancelTap(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Achtung", message: "Möchtest du das Quiz wirklich beenden?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ja", style: .default, handler: { action in
+            self.navigationController?.isNavigationBarHidden = false
+            self.moveToQuizList(animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Nein", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func moveToQuizList(animated: Bool = false) {
+        if let nc = self.navigationController, let quizListVC = nc.viewControllers.filter({ $0 is QuizListTableViewController }).first {
+            nc.popToViewController(quizListVC, animated: animated)
         }
     }
 }
