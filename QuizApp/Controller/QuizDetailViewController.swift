@@ -76,7 +76,13 @@ class QuizDetailViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func onButtonStartQuiz(_ sender: UIButton) {
-        
+        performSegue(withIdentifier: "showQuizgame", sender: quiz)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? QuizViewController, let sender = sender as? Quiz {
+            viewController.quiz = sender
+        }
     }
     
     func textViewDidChange(_ textView: UITextView) {

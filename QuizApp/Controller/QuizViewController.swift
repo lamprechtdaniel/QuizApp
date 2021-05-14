@@ -21,7 +21,7 @@ class QuizViewController: UIViewController {
     
     private var buttons: [UIButton]?
     private var maxQuestionNo: Int?
-    private var quiz: Quiz?
+    public var quiz: Quiz?
     private var correctAnswer: Int?
     private var selectedAnswer: Int?
     private var score: Int = 0
@@ -47,7 +47,7 @@ class QuizViewController: UIViewController {
     }
     
     private func fetchQuiz() {
-        quiz = quizData
+//        quiz = quizData
         maxQuestionNo = quiz?.questions.count ?? 0
         
         fetchQuestion()
@@ -59,16 +59,7 @@ class QuizViewController: UIViewController {
               let buttons = buttons
         else { return }
         if questionNo-1 >= quiz.questions.count {
-//            performSegue(withIdentifier: "showScoreView", sender: nil)
-            
-//            let scoreViewController = ScoreViewController()
-//            scoreViewController.score = score
-//            self.present(scoreViewController, animated: true, completion: nil)
-            
-            let storyboard = UIStoryboard(name: "Quiz", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "ScoreViewController") as! ScoreViewController
-            vc.score = score
-            self.present(vc, animated: true)
+            performSegue(withIdentifier: "showLeaderboard", sender: nil)
             return
         }
         
@@ -94,6 +85,12 @@ class QuizViewController: UIViewController {
     
     private func moveForward() {
         fetchQuestion()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? ScoreViewController {
+            destinationViewController.score = score
+        }
     }
     
     @IBAction func onAnswerTap(_ sender: UIButton) {

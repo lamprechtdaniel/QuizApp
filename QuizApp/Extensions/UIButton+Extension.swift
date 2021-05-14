@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIButton {
-    public func setupCornerRadius(cornerRadius: CGFloat) {
+    public func setupCornerRadius(cornerRadius: CGFloat = 20) {
         self.layer.cornerRadius = cornerRadius
     }
 }
