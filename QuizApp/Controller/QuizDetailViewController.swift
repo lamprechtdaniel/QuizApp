@@ -15,15 +15,9 @@ class QuizDetailViewController: UIViewController, UITextViewDelegate {
         didSet {
             if let enabled = editModeEnabled {
                 setTextfieldStyle(editEnabled: enabled)
-                constraintTextViewHeight.constant = textViewLearning.contentSize.height
                 buttonEdit.setTitle(enabled ? "Abbrechen" : "Ändern" , for: .normal)
                 buttonStartQuiz.isEnabled = !enabled
                 buttonStartQuiz.backgroundColor = !enabled ? .systemBlue : .systemGray
-                self.textViewLearning.layoutIfNeeded()
-                self.textViewLearning.layoutSubviews()
-                buttonStartQuiz.layoutSubviews()
-                self.buttonStartQuiz.layoutIfNeeded()
-                self.view.layoutIfNeeded()
                 
             }
         }
@@ -32,8 +26,6 @@ class QuizDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var buttonStartQuiz: UIButton!
     @IBOutlet weak var labelQuizTitle: UILabel!
     @IBOutlet weak var textViewLearning: UITextView!
-    @IBOutlet weak var constraintTextViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var constraintButtonVerticalSpacing: NSLayoutConstraint!
     @IBOutlet weak var buttonEdit: UIButton!
     
     override func viewDidLoad() {

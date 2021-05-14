@@ -59,6 +59,9 @@ class QuizViewController: UIViewController {
               let buttons = buttons
         else { return }
         if questionNo-1 >= quiz.questions.count {
+            if let nc = navigationController, let quizListVC = nc.viewControllers.filter({ $0 is QuizListTableViewController }).first {
+                nc.popToViewController(quizListVC, animated: false)
+            }
             performSegue(withIdentifier: "showLeaderboard", sender: nil)
             return
         }
