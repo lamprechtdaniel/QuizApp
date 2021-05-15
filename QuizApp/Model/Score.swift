@@ -9,8 +9,8 @@ import Foundation
 
 public struct Score: Codable {
     let _id: String
-    let timestamp: Date
-    let quizId: Int
+    let quizId: String
     let username: String
-    let points: Int
+    let record: Int
+    let Created_date: Date
 }

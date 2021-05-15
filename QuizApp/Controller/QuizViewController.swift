@@ -142,6 +142,7 @@ class QuizViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? ScoreViewController {
             destinationViewController.score = score
+            destinationViewController.quizId = quiz?._id
         }
     }
     

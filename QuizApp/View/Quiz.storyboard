@@ -189,21 +189,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You rank as:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5X-0c-nug">
-                                <rect key="frame" x="30" y="96" width="133" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="133" id="KsD-vP-O1Z"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="#3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BB9-91-SC3">
-                                <rect key="frame" x="179" y="94" width="36" height="33"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="27"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5AR-4o-9ps">
                                 <rect key="frame" x="68" y="287" width="110" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -266,30 +251,26 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="2yK-yb-Frb" firstAttribute="trailing" secondItem="GOM-5b-HEv" secondAttribute="trailing" constant="30" id="093-Hq-iAn"/>
-                            <constraint firstItem="BB9-91-SC3" firstAttribute="centerY" secondItem="F5X-0c-nug" secondAttribute="centerY" id="0fD-PH-eGw"/>
                             <constraint firstItem="2yK-yb-Frb" firstAttribute="trailing" secondItem="hUb-Lb-OYp" secondAttribute="trailing" constant="30" id="1Sa-U0-atL"/>
-                            <constraint firstItem="BB9-91-SC3" firstAttribute="leading" secondItem="F5X-0c-nug" secondAttribute="trailing" constant="16" id="2Q0-qc-0MG"/>
                             <constraint firstItem="wRh-NQ-Na4" firstAttribute="top" secondItem="ydh-Z3-Pev" secondAttribute="bottom" constant="8" id="405-An-DjP"/>
-                            <constraint firstItem="F5X-0c-nug" firstAttribute="top" secondItem="wRh-NQ-Na4" secondAttribute="bottom" constant="8" id="40F-zQ-f6K"/>
                             <constraint firstItem="2yK-yb-Frb" firstAttribute="bottom" secondItem="DbZ-4p-UHC" secondAttribute="bottom" id="4E2-Ea-oZk"/>
                             <constraint firstItem="GOM-5b-HEv" firstAttribute="leading" secondItem="2yK-yb-Frb" secondAttribute="leading" constant="30" id="8Sp-UT-DhU"/>
                             <constraint firstItem="wRh-NQ-Na4" firstAttribute="leading" secondItem="2yK-yb-Frb" secondAttribute="leading" constant="30" id="FFu-Ml-Lu5"/>
                             <constraint firstItem="DbZ-4p-UHC" firstAttribute="top" secondItem="GOM-5b-HEv" secondAttribute="bottom" constant="20" id="FXy-EZ-Bsw"/>
                             <constraint firstItem="hUb-Lb-OYp" firstAttribute="leading" secondItem="wRh-NQ-Na4" secondAttribute="trailing" constant="16" id="FgD-FP-5is"/>
-                            <constraint firstItem="GOM-5b-HEv" firstAttribute="top" secondItem="BB9-91-SC3" secondAttribute="bottom" constant="50" id="JyU-3g-LaN"/>
                             <constraint firstItem="hUb-Lb-OYp" firstAttribute="centerY" secondItem="wRh-NQ-Na4" secondAttribute="centerY" id="OGW-IB-h8G"/>
                             <constraint firstItem="ydh-Z3-Pev" firstAttribute="top" secondItem="2yK-yb-Frb" secondAttribute="top" constant="10" id="Poo-J2-yEC"/>
+                            <constraint firstItem="GOM-5b-HEv" firstAttribute="top" secondItem="ydh-Z3-Pev" secondAttribute="bottom" constant="126" id="Uah-tU-myU"/>
                             <constraint firstItem="ydh-Z3-Pev" firstAttribute="leading" secondItem="2yK-yb-Frb" secondAttribute="leading" constant="30" id="hmg-h1-QHn"/>
                             <constraint firstItem="2yK-yb-Frb" firstAttribute="trailing" secondItem="DbZ-4p-UHC" secondAttribute="trailing" id="nkw-80-AhQ"/>
                             <constraint firstItem="2yK-yb-Frb" firstAttribute="trailing" secondItem="ydh-Z3-Pev" secondAttribute="trailing" constant="30" id="nqt-y0-esZ"/>
-                            <constraint firstItem="F5X-0c-nug" firstAttribute="leading" secondItem="2yK-yb-Frb" secondAttribute="leading" constant="30" id="pAc-u5-i4M"/>
                             <constraint firstItem="DbZ-4p-UHC" firstAttribute="leading" secondItem="2yK-yb-Frb" secondAttribute="leading" id="t8p-Oc-lfa"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="PQh-At-KmM"/>
                     <connections>
+                        <outlet property="leaderboardLabel" destination="GOM-5b-HEv" id="b01-Qn-yDv"/>
                         <outlet property="leaderboardTableView" destination="DbZ-4p-UHC" id="ITY-QY-cKT"/>
-                        <outlet property="rankingLabel" destination="BB9-91-SC3" id="tqm-MX-Hhl"/>
                         <outlet property="scoreLabel" destination="hUb-Lb-OYp" id="LrL-4Y-fmU"/>
                     </connections>
                 </viewController>

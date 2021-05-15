@@ -46,8 +46,8 @@ class LeaderboardTableViewController: UITableViewController {
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .short
             dateFormatter.dateFormat = "dd.MM.yyyy"
-            cell.timestampLabel.text = dateFormatter.string(from: score.timestamp)
-            cell.pointsLabel.text = String(score.points)
+            cell.timestampLabel.text = dateFormatter.string(from: score.Created_date)
+            cell.pointsLabel.text = String(score.record)
         }
         
         return cell

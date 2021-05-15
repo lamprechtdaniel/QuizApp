@@ -11,7 +11,7 @@ class SyncManager {
     enum Error: Swift.Error {
             case fileNotFound
             case invalidDirectory
-            case writtingFailed
+            case writingFailed
             case readingFailed
             case syncFailed
     }
@@ -53,12 +53,88 @@ class SyncManager {
                     completion(.success)
                 } catch {
                     print(error)
-                    completion(.failure(.writtingFailed))
+                    completion(.failure(.writingFailed))
                 }
             }
             dataTask.resume()
         } else {
             completion(.failure(.syncFailed))
+        }
+    }
+    
+    internal func syncScores(of quizId: String, completion: @escaping (_ success: Bool, _ scores: [Score]?) -> Void) {
+        if var url = AppDelegate.backendHost  {
+            url.appendPathComponent("/scores/\(quizId)")
+            let dataTask = URLSession.shared.dataTask(with: url) { (responseData, response, error) in
+                if let error = error {
+                    print(error)
+                    completion(false, nil)
+                    return
+                }
+                var scores: [Score]?
+                if let responseData = responseData {
+                    do {
+                        scores = try self.decoder().decode([Score].self, from: responseData)
+                        
+                        completion(true, scores)
+                    } catch {
+                        print(error)
+                    }
+                }
+
+//                if let response = response as? HTTPURLResponse {
+//                    switch response.statusCode {
+//                    case 200:
+//                        completion(true, scores)
+//                        break
+//                    default:
+//                        completion(false, scores)
+//                        break
+//                    }
+//                }
+            }
+            dataTask.resume()
+        } else {
+            completion(false, nil)
+        }
+    }
+    
+    internal func postScore(quizId: String, username: String, record: Int, completion: @escaping (_ success: Bool) -> Void) {
+        if var requestUrl = AppDelegate.backendHost {
+            requestUrl.appendPathComponent("/scores")
+            var request = URLRequest(url: requestUrl)
+            request.httpMethod = "POST"
+            
+           
+            let uploadData = try! JSONSerialization.data(withJSONObject: [
+                "quizId": quizId,
+                "username": username,
+                "record": record
+            ], options: .prettyPrinted)
+            
+            request.httpBody = uploadData
+            request.setValue("\(uploadData.count)", forHTTPHeaderField: "Content-Length")
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+            let urlUploadTask = URLSession.shared.dataTask(with: request) { (responseData, response, error) in
+                if let error = error {
+                    print(error)
+                    completion(false)
+                    return
+                }
+
+                if let response = response as? HTTPURLResponse {
+                    switch response.statusCode {
+                    case 200:
+                        completion(true)
+                        break
+                    default:
+                        completion(false)
+                        break
+                    }
+                }
+            }
+            urlUploadTask.resume()
         }
     }
     
@@ -146,7 +222,7 @@ class SyncManager {
             try data.write(to: url, options: [.atomic])
         } catch {
             print(error)
-            throw Error.writtingFailed
+            throw Error.writingFailed
         }
     }
     

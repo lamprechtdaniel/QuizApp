@@ -23,6 +23,7 @@ class StartScreenViewController: UIViewController {
         textfieldName.isHidden = true
         labelName.isHidden = true
         activityView.startAnimating()
+        
         SyncManager.shared.syncQuizzes(completion: { result in
             DispatchQueue.main.async {
                 self.activityView.stopAnimating()
