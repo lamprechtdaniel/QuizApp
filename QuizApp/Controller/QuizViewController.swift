@@ -20,6 +20,9 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var fourthAnswerButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var jokerButton: UIButton!
+    @IBOutlet weak var timerView: UIView!
+    @IBOutlet weak var timerViewWidthConstraint: NSLayoutConstraint!
+    
     
     private var buttons: [UIButton]?
     private var maxQuestionNo: Int?
@@ -57,6 +60,7 @@ class QuizViewController: UIViewController {
         }
         cancelButton.layer.cornerRadius = 8
         self.navigationController?.isNavigationBarHidden = true
+        timerView.layer.cornerRadius = 4
     }
     
     private func fetchQuiz() {
@@ -72,6 +76,7 @@ class QuizViewController: UIViewController {
               let buttons = buttons
         else { return }
         if questionNo-1 >= quiz.questions.count {
+            self.navigationController?.isNavigationBarHidden = false
             moveToQuizList()
             performSegue(withIdentifier: "showLeaderboard", sender: nil)
             return
@@ -81,6 +86,7 @@ class QuizViewController: UIViewController {
             button.layer.borderWidth = 0
             button.isUserInteractionEnabled = true
             button.backgroundColor = UIColor(hexString: "DEE0E4", alpha: 1.00)
+            view.layoutIfNeeded()
         }
         
         questionNoLabel.text = "Question \(questionNo) of \(maxQuestionNo)"
@@ -89,12 +95,48 @@ class QuizViewController: UIViewController {
         for answer in quiz.questions[questionNo-1].answers {
             buttons[count].setTitle(answer.text, for: .normal)
             if answer.isCorrect { correctAnswer = count }
+            buttons[count].setTitleColor(UIColor.black, for: .normal)
+            buttons[count].layoutIfNeeded()
             count += 1
         }
+        
+        if !jokerUsed {
+            jokerButton.isEnabled = true
+        }
+        
+        self.timerView.isHidden = false
+        
+        
+        UIView.animate(withDuration: 20.0, delay: 0.0, options: .curveLinear, animations: {
+//                            self.timerViewLeadingConstraint.constant = UIScreen.main.bounds.size.width / 2 - 4
+//                            self.timerViewTrailingConstraint.constant = UIScreen.main.bounds.size.width / 2 - 4
+            self.timerViewWidthConstraint.constant = 8
+            self.timerView.backgroundColor = UIColor.red
+            self.firstAnswerButton.isUserInteractionEnabled = true
+            self.view.layoutIfNeeded()
+        }, completion: {
+            finished in
+                if finished {
+                    self.questionNo += 1
+                }
+        })
+        
     }
     
     private func moveForward() {
-        fetchQuestion()
+        removeAnimation(timerView: self.timerView)
+        timerView.layoutIfNeeded()
+        
+        view.layoutSubviews()
+        UIView.animate(withDuration: 0.5, animations: {
+            self.timerViewWidthConstraint.constant = UIScreen.main.bounds.size.width - 2 * 40
+            self.timerView.backgroundColor = UIColor.green
+            self.view.layoutIfNeeded()
+        }, completion: { completed in
+            if completed {
+                self.fetchQuestion()
+            }
+        })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -107,6 +149,7 @@ class QuizViewController: UIViewController {
         guard let correctAnswer = correctAnswer, let buttons = buttons else { return }
         
         selectedAnswer = sender.tag
+        jokerButton.isEnabled  = false
         
         if selectedAnswer == correctAnswer {
             buttons[sender.tag].layer.borderWidth = 3
@@ -122,6 +165,8 @@ class QuizViewController: UIViewController {
         for button in buttons {
             button.isUserInteractionEnabled = false
         }
+        
+        timerView.isHidden = true
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.questionNo += 1
@@ -158,7 +203,12 @@ class QuizViewController: UIViewController {
             button.isUserInteractionEnabled = false
             UIView.animate(withDuration: 0.5, animations: {
                 button.backgroundColor = UIColor(hexString: "DEE0E4", alpha: 0.3)
+                button.setTitleColor(UIColor.black.withAlphaComponent(0.3), for: .normal)
             })
         })
+    }
+    
+    func removeAnimation(timerView: UIView) {
+        timerView.layer.removeAllAnimations()
     }
 }

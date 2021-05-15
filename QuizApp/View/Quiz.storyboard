@@ -112,6 +112,14 @@
                                     <action selector="onJokerTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Dsj-gZ-PIK"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MM9-79-pYd">
+                                <rect key="frame" x="40" y="810" width="334" height="8"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="8" id="28M-4g-0Lf"/>
+                                    <constraint firstAttribute="width" constant="334" id="nIQ-c2-JXJ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -129,6 +137,8 @@
                             <constraint firstItem="yEw-vf-DTP" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="8" id="fvs-pE-4yo"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="OdF-3r-eBF" secondAttribute="bottom" constant="60" id="lhH-k2-igz"/>
                             <constraint firstItem="XFL-gK-4mk" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="8" id="sT6-uL-erP"/>
+                            <constraint firstItem="MM9-79-pYd" firstAttribute="top" secondItem="OdF-3r-eBF" secondAttribute="bottom" constant="8" id="sYu-eg-awV"/>
+                            <constraint firstItem="MM9-79-pYd" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="t6h-LX-Pa0"/>
                             <constraint firstItem="WSN-pH-Daf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="xgW-CF-MYH"/>
                         </constraints>
                     </view>
@@ -141,6 +151,8 @@
                         <outlet property="questionNoLabel" destination="IOZ-LC-LHr" id="vTx-hS-oOJ"/>
                         <outlet property="secondAnswerButton" destination="pwr-Hw-RwC" id="lSX-JG-zTj"/>
                         <outlet property="thirdAnswerButton" destination="5s1-yz-Rri" id="ONm-5y-xUs"/>
+                        <outlet property="timerView" destination="MM9-79-pYd" id="tFg-5J-78G"/>
+                        <outlet property="timerViewWidthConstraint" destination="nIQ-c2-JXJ" id="NWL-ml-416"/>
                         <segue destination="Gex-fH-7y7" kind="show" identifier="showLeaderboard" id="9fW-UF-Spl"/>
                     </connections>
                 </viewController>
@@ -290,6 +302,9 @@
         <image name="star.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
