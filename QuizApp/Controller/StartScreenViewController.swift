@@ -23,6 +23,7 @@ class StartScreenViewController: UIViewController {
     override func viewDidLoad() {
         buttonSubmit.isHidden = true
         textfieldName.isHidden = true
+        labelName.isHidden = true
         activityView.startAnimating()
         SyncManager.shared.syncQuizzes(completion: { result in
             
@@ -40,11 +41,11 @@ class StartScreenViewController: UIViewController {
                 self.labelActivityStatus.isHidden = true
                 self.buttonSubmit.isHidden = false
                 self.textfieldName.isHidden = false
+                self.labelName.isHidden = false
             }
         })
         
         labelWarning.isHidden = true
-        labelName.isHidden = false
         textfieldName.tintColor = .systemGray
         textfieldName.placeholder = "Namen eingeben"
         

@@ -8,8 +8,11 @@
 import Foundation
 
 public struct Quiz: Codable {
-    let id:Int
-    let title:String
-    let lernstoff:String
-    let questions:[Question]
+    var _id:String
+    var title:String
+    var lernstoff:String
+    var questions:[Question]
+    var last_change: Date
+    
+    
 }

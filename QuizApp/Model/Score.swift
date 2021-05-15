@@ -8,7 +8,7 @@
 import Foundation
 
 public struct Score: Codable {
-    let id: Int
+    let _id: String
     let timestamp: Date
     let quizId: Int
     let username: String

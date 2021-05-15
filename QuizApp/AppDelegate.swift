@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.string(forKey: "AppQuiz.username")
         }
     }
+    static let backendHost = URL(string: "http://127.0.0.1:3000")
     
 
 

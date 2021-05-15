@@ -9,7 +9,7 @@ import Foundation
 
 class SyncManager {
     enum Error: Swift.Error {
-            case fileAlreadyExists
+            case fileNotFound
             case invalidDirectory
             case writtingFailed
             case readingFailed
@@ -18,62 +18,100 @@ class SyncManager {
     
     enum Result<Value> {
         case success(Value)
-        case failure(Error, Value?)
+        case failure(Error?, Value?)
     }
     
     static var shared = SyncManager()
     
+    func decoder() -> JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .custom({ decoder in
+            let container = try decoder.singleValueContainer()
+            let text = try container.decode(String.self)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            return dateFormatter.date(from: text) ?? Date()
+        })
+        return decoder
+    }
+
+    
     internal func syncQuizzes(completion: @escaping (Result<[Quiz]>) -> Void) {
-        if let url = URL(string: "") {
-            URLSession.shared.dataTask(with: url) { (data, response, error) in
+        if var url = AppDelegate.backendHost  {
+            url.appendPathComponent("/quizes")
+            let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if let error = error {
                     print(error)
+                    completion(.failure(.syncFailed, self.localQuizData))
                 }
-                //read from file
-                var quizzesFromStorage = [Quiz]()
-                do {
-                    let data = try self.readFromFile()
-                    quizzesFromStorage = try JSONDecoder().decode([Quiz].self, from: data)
-                } catch {
-                    print(error)
-                    completion(.failure(error as! SyncManager.Error, nil))
-                }
-                
                 guard let data = data else {
-                    completion(.failure(.syncFailed, quizzesFromStorage))
+                    completion(.failure(.syncFailed, self.localQuizData))
                     return
                 }
                 do {
                     try self.saveToFile(data: data)
-                    completion(.success(try JSONDecoder().decode([Quiz].self, from: data)))
+                    completion(.success(try self.decoder().decode([Quiz].self, from: data)))
                 } catch {
                     print(error)
-                    completion(.failure(error as! SyncManager.Error, quizzesFromStorage))
+                    completion(.failure(nil, self.localQuizData))
                 }
             }
+            dataTask.resume()
         } else {
-            var dummyQuizzes = [Quiz]()
-            var dummyQuestions = [Question]()
-            
-            var dummyAnswers1 = [Answer]()
-            dummyAnswers1.append(Answer(id: 1, text: "fix des", isCorrect: true))
-            dummyAnswers1.append(Answer(id: 2, text: "fix net", isCorrect: false))
-            dummyAnswers1.append(Answer(id: 3, text: "fix nö", isCorrect: false))
-            dummyAnswers1.append(Answer(id: 4, text: "fix nana", isCorrect: false))
-            var dummyAnswers2 = [Answer]()
-            dummyAnswers2.append(Answer(id: 5, text: "klingt zu richtig", isCorrect: false))
-            dummyAnswers2.append(Answer(id: 6, text: "teilweise richtig", isCorrect: false))
-            dummyAnswers2.append(Answer(id: 7, text: "fix falsch", isCorrect: true))
-            dummyAnswers2.append(Answer(id: 8, text: "no nie keat den dreck", isCorrect: false))
-
-            dummyQuestions.append(Question(id: 1, question: "hehe 1. Frage", answers: dummyAnswers1))
-            dummyQuestions.append(Question(id: 1, question: "wos isch richtig?", answers: dummyAnswers2))
-            
-            dummyQuizzes.append(Quiz(id: 1, title: "myQuiz", lernstoff: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet", questions: dummyQuestions))
-            
-            
-            completion(.failure(.syncFailed, dummyQuizzes))
+            completion(.failure(.syncFailed, localQuizData))
         }
+    }
+    
+    
+    internal func updateLearning(of quizId: String, with lernstoff: String, changedAt lastChange: Date, completion: @escaping (_ success: Bool) -> Void) {
+        if var requestUrl = AppDelegate.backendHost {
+            requestUrl.appendPathComponent("/quizes/update/\(quizId)")
+            var request = URLRequest(url: requestUrl)
+            request.httpMethod = "PUT"
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            
+            let uploadData = try! JSONSerialization.data(withJSONObject: [
+                "lernstoff": lernstoff,
+                "last_change": dateFormatter.string(from: lastChange)
+            ], options: .prettyPrinted)
+            
+            request.httpBody = uploadData
+            request.setValue("\(uploadData.count)", forHTTPHeaderField: "Content-Length")
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+            let urlUploadTask = URLSession.shared.dataTask(with: request) { (responseData, response, error) in
+                if let error = error {
+                    print(error)
+                    completion(false)
+                    return
+                }
+
+                if let response = response as? HTTPURLResponse {
+                    switch response.statusCode {
+                    case 200:
+                        completion(true)
+                        break
+                    default:
+                        completion(false)
+                        break
+                    }
+                }
+            }
+            urlUploadTask.resume()
+        }
+        
+    }
+    
+    internal var localQuizData:[Quiz]? {
+        do {
+            let data = try self.readFromFile()
+            return try decoder().decode([Quiz].self, from: data)
+        } catch {
+            print(error)
+        }
+        return nil
     }
 
     internal let fileManager = FileManager()
@@ -81,9 +119,6 @@ class SyncManager {
     internal func saveToFile(data:Data) throws {
         guard let url = url() else {
             throw Error.invalidDirectory
-        }
-        if fileManager.fileExists(atPath: url.absoluteString) {
-            throw Error.fileAlreadyExists
         }
         do {
             try data.write(to: url)
@@ -98,8 +133,8 @@ class SyncManager {
             throw Error.invalidDirectory
         }
         
-        guard fileManager.fileExists(atPath: url.absoluteString) else {
-            throw Error.fileAlreadyExists
+        guard fileManager.fileExists(atPath: url.path) else {
+            throw Error.fileNotFound
         }
         
         do {
@@ -114,7 +149,7 @@ class SyncManager {
         guard let url = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return nil
         }
-        return url.appendingPathComponent("Quiz.json")
+        return url.appendingPathComponent("Quizzes.json")
     }
     
 }

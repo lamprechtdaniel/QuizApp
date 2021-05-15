@@ -56,7 +56,21 @@ class QuizDetailViewController: UIViewController, UITextViewDelegate {
         if learningTextHasChanged {
             let alertVC = UIAlertController(title: "Lernstoff ändern", message: "Bist du dir sicher, dass den Lernstoff ändern möchtest?", preferredStyle: .actionSheet)
             alertVC.addAction(UIAlertAction(title: "Änderungen übernehmen", style: .default, handler: { _ in
-                //TODO: post Request
+                if let quiz = self.quiz {
+                    SyncManager.shared.updateLearning(of: quiz._id, with: self.textViewLearning.text, changedAt: quiz.last_change, completion: { success in
+                        if !success {
+                            let alertViewController = UIAlertController(title: "Update fehlgeschlagen", message: "Der Lernstoff wurde in der Zwischenzeit geändert. Dein Text wurde in die Zwischenablage kopiert!", preferredStyle: .alert)
+                            alertViewController.addAction(UIAlertAction(title: "Verstanden", style: .cancel, handler: nil))
+                            DispatchQueue.main.async {
+                                self.present(alertViewController, animated: true, completion: nil)
+                            }
+                            UIPasteboard.general.string = self.textViewLearning.text
+                    
+                            //TODO: auf antwort reagieren
+                            //lernstoff laden und einfügen
+                        }
+                    })
+                }
                 self.learningTextHasChanged = false
             }))
             alertVC.addAction(UIAlertAction(title: "Änderungen verwefen", style: .cancel, handler: {_ in

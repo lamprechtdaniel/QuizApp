@@ -94,7 +94,7 @@ class QuizViewController: UIViewController {
         questionLabel.text = quiz.questions[questionNo-1].question
         var count = 0
         for answer in quiz.questions[questionNo-1].answers {
-            buttons[count].setTitle(answer.text, for: .normal)
+            buttons[count].setTitle(answer.answer, for: .normal)
             if answer.isCorrect { correctAnswer = count }
             buttons[count].setTitleColor(UIColor.black, for: .normal)
             buttons[count].layoutIfNeeded()
@@ -197,7 +197,7 @@ class QuizViewController: UIViewController {
         let pickedIncorrectAnswers = incorrectAnswers[randomPick: 2]
         _ = buttons.filter({ (button: UIButton) -> Bool in
             return pickedIncorrectAnswers.contains(where: { (answer: Answer) -> Bool in
-                return answer.text == button.title(for: .normal)
+                return answer.answer == button.title(for: .normal)
             })
         }).map({ button in
             button.isUserInteractionEnabled = false

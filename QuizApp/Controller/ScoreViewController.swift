@@ -35,7 +35,7 @@ class ScoreViewController: UIViewController {
     }
     
     private func fetchData() {
-        scores = scoreData
+//        scores = scoreData
         guard let score = score, var scores = scores else { return }
         scoreLabel.text = String(score)
         scores.sort { $0.points > $1.points }
