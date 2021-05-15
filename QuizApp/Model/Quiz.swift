@@ -14,5 +14,12 @@ public struct Quiz: Codable {
     var questions:[Question]
     var last_change: Date
     
-    
+    static var items: [Quiz]? {
+        do {
+            return try SyncManager.shared.decoder().decode([Quiz].self, from: try SyncManager.shared.readFromFile())
+        } catch {
+            print(error)
+        }
+        return nil
+    }
 }

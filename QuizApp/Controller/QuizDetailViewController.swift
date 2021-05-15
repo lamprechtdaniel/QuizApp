@@ -9,6 +9,11 @@ import Foundation
 import UIKit
 
 class QuizDetailViewController: UIViewController, UITextViewDelegate {
+    var quizId: String? {
+        didSet {
+            quiz = Quiz.items?.filter({ $0._id == quizId }).first
+        }
+    }
     var quiz: Quiz?
     var learningTextHasChanged = false
     internal var editModeEnabled: Bool? {
@@ -18,7 +23,6 @@ class QuizDetailViewController: UIViewController, UITextViewDelegate {
                 buttonEdit.setTitle(enabled ? "Abbrechen" : "Ändern" , for: .normal)
                 buttonStartQuiz.isEnabled = !enabled
                 buttonStartQuiz.backgroundColor = !enabled ? .systemBlue : .systemGray
-                
             }
         }
     }
@@ -57,17 +61,18 @@ class QuizDetailViewController: UIViewController, UITextViewDelegate {
             let alertVC = UIAlertController(title: "Lernstoff ändern", message: "Bist du dir sicher, dass den Lernstoff ändern möchtest?", preferredStyle: .actionSheet)
             alertVC.addAction(UIAlertAction(title: "Änderungen übernehmen", style: .default, handler: { _ in
                 if let quiz = self.quiz {
-                    SyncManager.shared.updateLearning(of: quiz._id, with: self.textViewLearning.text, changedAt: quiz.last_change, completion: { success in
-                        if !success {
-                            let alertViewController = UIAlertController(title: "Update fehlgeschlagen", message: "Der Lernstoff wurde in der Zwischenzeit geändert. Dein Text wurde in die Zwischenablage kopiert!", preferredStyle: .alert)
-                            alertViewController.addAction(UIAlertAction(title: "Verstanden", style: .cancel, handler: nil))
-                            DispatchQueue.main.async {
-                                self.present(alertViewController, animated: true, completion: nil)
+                    SyncManager.shared.updateLearning(of: quiz._id, with: self.textViewLearning.text, changedAt: quiz.last_change, completion: { (success, quiz) in
+                        if let respondedQuiz = quiz {
+                            self.quiz = respondedQuiz
+                            if !success {
+                                let alertViewController = UIAlertController(title: "Update fehlgeschlagen", message: "Der Lernstoff wurde in der Zwischenzeit geändert. Dein Text wurde in die Zwischenablage kopiert!", preferredStyle: .alert)
+                                alertViewController.addAction(UIAlertAction(title: "Verstanden", style: .cancel, handler: nil))
+                                DispatchQueue.main.async {
+                                    self.present(alertViewController, animated: true, completion: nil)
+                                }
+                                UIPasteboard.general.string = self.textViewLearning.text
+                                self.textViewLearning.text = respondedQuiz.lernstoff
                             }
-                            UIPasteboard.general.string = self.textViewLearning.text
-                    
-                            //TODO: auf antwort reagieren
-                            //lernstoff laden und einfügen
                         }
                     })
                 }

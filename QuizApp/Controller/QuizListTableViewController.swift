@@ -11,7 +11,9 @@ import UIKit
 class QuizListTableViewController: UITableViewController {
     
     @IBOutlet weak var labelWelcome: UILabel!
-    var quizzes: [Quiz]?
+    var quizzes: [Quiz]? {
+        return Quiz.items
+    }
     override func viewDidLoad() {
         labelWelcome.text = "Willkommen \(AppDelegate.storedUserName ?? "Anonymos")"
     }
@@ -39,13 +41,13 @@ class QuizListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let quizzes = quizzes, quizzes.count > indexPath.row {
             let quiz = quizzes[indexPath.row]
-            performSegue(withIdentifier: "showQuizDetail", sender: quiz)
+            performSegue(withIdentifier: "showQuizDetail", sender: quiz._id)
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let quizDetailVC = segue.destination as? QuizDetailViewController, let quiz = sender as? Quiz {
-            quizDetailVC.quiz = quiz
+        if let quizDetailVC = segue.destination as? QuizDetailViewController, let quizId = sender as? String {
+            quizDetailVC.quizId = quizId
         }
     }
 }

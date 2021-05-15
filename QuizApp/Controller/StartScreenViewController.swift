@@ -17,25 +17,13 @@ class StartScreenViewController: UIViewController {
     @IBOutlet weak var activityView: UIActivityIndicatorView!
     @IBOutlet weak var labelActivityStatus: UILabel!
     @IBOutlet weak var labelName: UILabel!
-    
-    var quizzes: [Quiz]?
-    
+        
     override func viewDidLoad() {
         buttonSubmit.isHidden = true
         textfieldName.isHidden = true
         labelName.isHidden = true
         activityView.startAnimating()
         SyncManager.shared.syncQuizzes(completion: { result in
-            
-            switch result {
-            case .success(let syncedQuizzes):
-                self.quizzes = syncedQuizzes
-                break
-            case .failure( _, let loadedQuizzes):
-                self.quizzes = loadedQuizzes
-                break
-            }
-            
             DispatchQueue.main.async {
                 self.activityView.stopAnimating()
                 self.labelActivityStatus.isHidden = true
@@ -67,12 +55,6 @@ class StartScreenViewController: UIViewController {
         performSegue(withIdentifier: "showQuizList", sender: nil)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationViewController = segue.destination as? QuizListTableViewController {
-            destinationViewController.quizzes = quizzes
-        } 
-    }
-    
     @IBAction func textfieldChanged(_ sender: Any) {
         if let textField = sender as? UITextField {
             let disable = textField.text == nil || textField.text?.count == 0
@@ -99,7 +81,5 @@ class StartScreenViewController: UIViewController {
         buttonSubmit.isEnabled = enable
         buttonSubmit.backgroundColor = enable ? .systemBlue : .lightGray
     }
-    
-    
 }
 

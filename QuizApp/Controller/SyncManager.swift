@@ -17,8 +17,8 @@ class SyncManager {
     }
     
     enum Result<Value> {
-        case success(Value)
-        case failure(Error?, Value?)
+        case success
+        case failure(Error?)
     }
     
     static var shared = SyncManager()
@@ -36,34 +36,34 @@ class SyncManager {
     }
 
     
-    internal func syncQuizzes(completion: @escaping (Result<[Quiz]>) -> Void) {
+    internal func syncQuizzes(completion: @escaping (Result<Any>) -> Void) {
         if var url = AppDelegate.backendHost  {
             url.appendPathComponent("/quizes")
             let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if let error = error {
                     print(error)
-                    completion(.failure(.syncFailed, self.localQuizData))
+                    completion(.failure(.syncFailed))
                 }
                 guard let data = data else {
-                    completion(.failure(.syncFailed, self.localQuizData))
+                    completion(.failure(.syncFailed))
                     return
                 }
                 do {
                     try self.saveToFile(data: data)
-                    completion(.success(try self.decoder().decode([Quiz].self, from: data)))
+                    completion(.success)
                 } catch {
                     print(error)
-                    completion(.failure(nil, self.localQuizData))
+                    completion(.failure(.writtingFailed))
                 }
             }
             dataTask.resume()
         } else {
-            completion(.failure(.syncFailed, localQuizData))
+            completion(.failure(.syncFailed))
         }
     }
     
     
-    internal func updateLearning(of quizId: String, with lernstoff: String, changedAt lastChange: Date, completion: @escaping (_ success: Bool) -> Void) {
+    internal func updateLearning(of quizId: String, with lernstoff: String, changedAt lastChange: Date, completion: @escaping (_ success: Bool, _ quiz: Quiz?) -> Void) {
         if var requestUrl = AppDelegate.backendHost {
             requestUrl.appendPathComponent("/quizes/update/\(quizId)")
             var request = URLRequest(url: requestUrl)
@@ -84,17 +84,39 @@ class SyncManager {
             let urlUploadTask = URLSession.shared.dataTask(with: request) { (responseData, response, error) in
                 if let error = error {
                     print(error)
-                    completion(false)
+                    completion(false, nil)
                     return
+                }
+                var quiz: Quiz?
+                if let responseData = responseData {
+                    do {
+                        quiz = try self.decoder().decode(Quiz.self, from: responseData)
+                        
+                       
+                        if quiz != nil, var quizzes = Quiz.items, let indexOfUpdatingQuiz = quizzes.firstIndex(where: { $0._id == quiz?._id }) {
+                            quizzes[indexOfUpdatingQuiz] = quiz!
+                            
+                            let encoder = JSONEncoder()
+                            encoder.dateEncodingStrategy = .custom({(date, encoder) in
+                                let dateFormatter = DateFormatter()
+                                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                                var container = encoder.singleValueContainer()
+                                try container.encode(dateFormatter.string(from: date))
+                            })
+                            try self.saveToFile(data: encoder.encode(quizzes))
+                        }
+                    } catch {
+                        print(error)
+                    }
                 }
 
                 if let response = response as? HTTPURLResponse {
                     switch response.statusCode {
                     case 200:
-                        completion(true)
+                        completion(true, quiz)
                         break
                     default:
-                        completion(false)
+                        completion(false, quiz)
                         break
                     }
                 }
@@ -121,7 +143,7 @@ class SyncManager {
             throw Error.invalidDirectory
         }
         do {
-            try data.write(to: url)
+            try data.write(to: url, options: [.atomic])
         } catch {
             print(error)
             throw Error.writtingFailed
