@@ -61,6 +61,7 @@ class QuizViewController: UIViewController {
         cancelButton.layer.cornerRadius = 8
         self.navigationController?.isNavigationBarHidden = true
         timerView.layer.cornerRadius = 4
+        timerViewWidthConstraint.constant = UIScreen.main.bounds.width - 2 * 40
     }
     
     private func fetchQuiz() {
@@ -108,8 +109,6 @@ class QuizViewController: UIViewController {
         
         
         UIView.animate(withDuration: 20.0, delay: 0.0, options: .curveLinear, animations: {
-//                            self.timerViewLeadingConstraint.constant = UIScreen.main.bounds.size.width / 2 - 4
-//                            self.timerViewTrailingConstraint.constant = UIScreen.main.bounds.size.width / 2 - 4
             self.timerViewWidthConstraint.constant = 8
             self.timerView.backgroundColor = UIColor.red
             self.firstAnswerButton.isUserInteractionEnabled = true
@@ -117,6 +116,7 @@ class QuizViewController: UIViewController {
         }, completion: {
             finished in
                 if finished {
+                    self.timerView.isHidden = true
                     self.questionNo += 1
                 }
         })
@@ -124,7 +124,7 @@ class QuizViewController: UIViewController {
     }
     
     private func moveForward() {
-        removeAnimation(timerView: self.timerView)
+        timerView.removeAnimation()
         timerView.layoutIfNeeded()
         
         view.layoutSubviews()
@@ -206,9 +206,5 @@ class QuizViewController: UIViewController {
                 button.setTitleColor(UIColor.black.withAlphaComponent(0.3), for: .normal)
             })
         })
-    }
-    
-    func removeAnimation(timerView: UIView) {
-        timerView.layer.removeAllAnimations()
     }
 }
