@@ -14,8 +14,21 @@ class QuizListTableViewController: UITableViewController {
     var quizzes: [Quiz]? {
         return Quiz.items
     }
+    var pullToRefresh = UIRefreshControl()
+    
     override func viewDidLoad() {
         labelWelcome.text = "Willkommen \(AppDelegate.storedUserName ?? "Anonymos")"
+        pullToRefresh.attributedTitle = NSAttributedString(string: "Quizzes neu laden")
+        pullToRefresh.addTarget(self, action: #selector(refreshQuizzes(_:)) , for: .valueChanged)
+        tableView.addSubview(pullToRefresh)
+    }
+    
+    @objc func refreshQuizzes(_ sender: Any) {
+        SyncManager.shared.syncQuizzes(completion: { _ in
+            DispatchQueue.main.async {
+                self.pullToRefresh.endRefreshing()
+            }
+        })
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
