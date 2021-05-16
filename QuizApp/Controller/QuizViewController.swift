@@ -63,6 +63,10 @@ class QuizViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         timerView.layer.cornerRadius = 4
         timerViewWidthConstraint.constant = UIScreen.main.bounds.width - 2 * 40
+        firstAnswerButton.titleLabel?.lineBreakMode = .byWordWrapping
+        secondAnswerButton.titleLabel?.lineBreakMode = .byWordWrapping
+        thirdAnswerButton.titleLabel?.lineBreakMode = .byWordWrapping
+        fourthAnswerButton.titleLabel?.lineBreakMode = .byWordWrapping
     }
     
     private func fetchQuiz() {
