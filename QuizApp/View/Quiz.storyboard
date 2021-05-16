@@ -203,7 +203,7 @@
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DbZ-4p-UHC">
                                 <rect key="frame" x="0.0" y="238" width="414" height="570"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ScoreCell" rowHeight="120" id="UQD-NA-h1o" customClass="LeaderboardTableViewCell" customModule="QuizApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="24.5" width="414" height="120"/>
@@ -240,6 +240,7 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="IsA-bf-QTV" secondAttribute="trailing" constant="32" id="yC7-Uq-t0U"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="pointsLabel" destination="IsA-bf-QTV" id="CI8-Lb-mHE"/>
                                             <outlet property="timestampLabel" destination="6n5-0c-Vju" id="JiS-rz-EAj"/>
@@ -302,9 +303,6 @@
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

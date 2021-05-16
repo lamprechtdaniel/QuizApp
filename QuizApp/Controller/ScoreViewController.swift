@@ -40,6 +40,7 @@ class ScoreViewController: UIViewController {
     private func styleUI() {
         leaderboardTableView.isHidden = true
         leaderboardLabel.isHidden = true
+        tryAgainButton.layer.cornerRadius = 8
     }
     
     private func uploadScore() {

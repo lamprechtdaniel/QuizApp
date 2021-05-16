@@ -101,7 +101,7 @@ class SyncManager {
     
     internal func postScore(quizId: String, username: String, record: Int, completion: @escaping (_ success: Bool) -> Void) {
         if !Reachability.isConnectedToNetwork(){
-            print("Internet Connection Available!")
+            print("Internet Connection not Available!")
             completion(false)
             return
         }
