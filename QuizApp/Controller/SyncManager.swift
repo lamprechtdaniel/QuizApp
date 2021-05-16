@@ -173,7 +173,6 @@ class SyncManager {
                     do {
                         quiz = try self.decoder().decode(Quiz.self, from: responseData)
                         
-                       
                         if quiz != nil, var quizzes = Quiz.items, let indexOfUpdatingQuiz = quizzes.firstIndex(where: { $0._id == quiz?._id }) {
                             quizzes[indexOfUpdatingQuiz] = quiz!
                             

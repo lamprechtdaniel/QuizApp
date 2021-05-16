@@ -69,9 +69,9 @@ class QuizDetailViewController: UIViewController, UITextViewDelegate {
                                 alertViewController.addAction(UIAlertAction(title: "Verstanden", style: .cancel, handler: nil))
                                 DispatchQueue.main.async {
                                     self.present(alertViewController, animated: true, completion: nil)
+                                    UIPasteboard.general.string = self.textViewLearning.text
+                                    self.textViewLearning.text = respondedQuiz.lernstoff
                                 }
-                                UIPasteboard.general.string = self.textViewLearning.text
-                                self.textViewLearning.text = respondedQuiz.lernstoff
                             }
                         }
                     })
