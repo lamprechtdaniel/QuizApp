@@ -105,6 +105,7 @@ class QuizViewController: UIViewController {
         if !jokerUsed {
             jokerButton.isEnabled = true
         }
+        jokerButton.layoutIfNeeded()
         
         self.timerView.isHidden = false
         
