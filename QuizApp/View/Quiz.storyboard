@@ -76,7 +76,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frage 1 von 10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOZ-LC-LHr">
-                                <rect key="frame" x="119.5" y="52" width="175.5" height="32"/>
+                                <rect key="frame" x="83" y="52" width="248" height="32"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -147,6 +147,8 @@
                             <constraint firstItem="OdF-3r-eBF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="eGQ-rD-DOY"/>
                             <constraint firstItem="yEw-vf-DTP" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="8" id="fvs-pE-4yo"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="OdF-3r-eBF" secondAttribute="bottom" constant="60" id="lhH-k2-igz"/>
+                            <constraint firstItem="IOZ-LC-LHr" firstAttribute="leading" secondItem="XFL-gK-4mk" secondAttribute="trailing" constant="16" id="liJ-JV-Yfc"/>
+                            <constraint firstItem="yEw-vf-DTP" firstAttribute="leading" secondItem="IOZ-LC-LHr" secondAttribute="trailing" constant="16" id="pwl-PP-nvg"/>
                             <constraint firstItem="MM9-79-pYd" firstAttribute="top" secondItem="OdF-3r-eBF" secondAttribute="bottom" constant="8" id="sYu-eg-awV"/>
                             <constraint firstItem="MM9-79-pYd" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="t6h-LX-Pa0"/>
                             <constraint firstItem="WSN-pH-Daf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="xgW-CF-MYH"/>
