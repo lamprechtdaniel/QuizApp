@@ -100,6 +100,11 @@ class SyncManager {
     }
     
     internal func postScore(quizId: String, username: String, record: Int, completion: @escaping (_ success: Bool) -> Void) {
+        if !Reachability.isConnectedToNetwork(){
+            print("Internet Connection Available!")
+            completion(false)
+            return
+        }
         if var requestUrl = AppDelegate.backendHost {
             requestUrl.appendPathComponent("/scores")
             var request = URLRequest(url: requestUrl)
