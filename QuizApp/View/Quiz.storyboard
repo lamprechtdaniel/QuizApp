@@ -86,28 +86,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFL-gK-4mk">
-                                <rect key="frame" x="90" y="840" width="234" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.1105628759" blue="0.073140390220000004" alpha="0.85174697977028146" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Qyv-XS-oUG"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
-                                <state key="normal" title="Quiz beenden">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="onCancelTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="nTe-Vu-iFs"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yEw-vf-DTP">
-                                <rect key="frame" x="354" y="52" width="28" height="28"/>
+                                <rect key="frame" x="347" y="52" width="35" height="35"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="M1L-uZ-BnA"/>
-                                    <constraint firstAttribute="width" constant="28" id="Stg-Dw-ug2"/>
+                                    <constraint firstAttribute="height" constant="35" id="M1L-uZ-BnA"/>
+                                    <constraint firstAttribute="width" constant="35" id="Stg-Dw-ug2"/>
                                 </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal">
-                                    <imageReference key="image" image="star.circle" catalog="system" symbolScale="large" renderingMode="original"/>
+                                    <imageReference key="image" image="star.circle" catalog="system" symbolScale="large" renderingMode="template"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="medium"/>
                                 </state>
                                 <connections>
                                     <action selector="onJokerTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Dsj-gZ-PIK"/>
@@ -121,11 +110,27 @@
                                     <constraint firstAttribute="width" constant="334" id="nIQ-c2-JXJ"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFL-gK-4mk">
+                                <rect key="frame" x="32" y="52" width="35" height="35"/>
+                                <color key="backgroundColor" red="1" green="0.1105628759" blue="0.073140390220000004" alpha="0.85174697977028146" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="54I-hw-Ldi"/>
+                                    <constraint firstAttribute="width" constant="35" id="Fpm-h0-P3K"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <imageReference key="image" image="return" catalog="system" symbolScale="medium" renderingMode="template"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="medium"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCancelTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="nTe-Vu-iFs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="XFL-gK-4mk" secondAttribute="trailing" constant="90" id="0C2-Cf-7wr"/>
                             <constraint firstItem="IOZ-LC-LHr" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="8FL-zK-CTb"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="WSN-pH-Daf" secondAttribute="trailing" constant="8" id="8Tk-TW-5E9"/>
                             <constraint firstItem="IOZ-LC-LHr" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="8" id="D65-Fj-JQB"/>
@@ -133,11 +138,11 @@
                             <constraint firstItem="OdF-3r-eBF" firstAttribute="top" secondItem="WSN-pH-Daf" secondAttribute="bottom" constant="8" id="OM1-v5-Gvd"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="OdF-3r-eBF" secondAttribute="trailing" constant="30" id="Smg-Mc-RYP"/>
                             <constraint firstItem="WSN-pH-Daf" firstAttribute="top" secondItem="IOZ-LC-LHr" secondAttribute="bottom" constant="8" id="To8-sh-CWq"/>
+                            <constraint firstItem="XFL-gK-4mk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="U4l-Gc-H8H"/>
+                            <constraint firstItem="XFL-gK-4mk" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="8" id="b2u-TN-JfO"/>
                             <constraint firstItem="OdF-3r-eBF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="eGQ-rD-DOY"/>
-                            <constraint firstItem="XFL-gK-4mk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="90" id="fWf-Hi-ECS"/>
                             <constraint firstItem="yEw-vf-DTP" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="8" id="fvs-pE-4yo"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="OdF-3r-eBF" secondAttribute="bottom" constant="60" id="lhH-k2-igz"/>
-                            <constraint firstItem="XFL-gK-4mk" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="8" id="sT6-uL-erP"/>
                             <constraint firstItem="MM9-79-pYd" firstAttribute="top" secondItem="OdF-3r-eBF" secondAttribute="bottom" constant="8" id="sYu-eg-awV"/>
                             <constraint firstItem="MM9-79-pYd" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="t6h-LX-Pa0"/>
                             <constraint firstItem="WSN-pH-Daf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="xgW-CF-MYH"/>
@@ -257,7 +262,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2yK-yb-Frb"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="2yK-yb-Frb" firstAttribute="trailing" secondItem="GOM-5b-HEv" secondAttribute="trailing" constant="30" id="093-Hq-iAn"/>
                             <constraint firstItem="4A8-gF-NWv" firstAttribute="centerX" secondItem="Qdn-lt-rOC" secondAttribute="centerX" id="0vt-dj-9B3"/>
@@ -292,6 +297,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="return" catalog="system" width="128" height="101"/>
         <image name="star.circle" catalog="system" width="128" height="121"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

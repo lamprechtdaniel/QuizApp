@@ -36,6 +36,7 @@ class QuizDetailViewController: UIViewController, UITextViewDelegate {
         textViewLearning.layer.borderWidth = 0.5
         textViewLearning.sizeToFit()
         buttonStartQuiz.layer.cornerRadius = 8.0
+        textViewLearning.layer.cornerRadius = 8.0
         if let quiz = quiz {
             textViewLearning.text = quiz.lernstoff
             labelQuizTitle.text = quiz.title
@@ -49,7 +50,6 @@ class QuizDetailViewController: UIViewController, UITextViewDelegate {
         if editEnabled {
             textViewLearning.backgroundColor = .systemGray6
             textViewLearning.layer.borderColor = UIColor.systemGray.cgColor
-            textViewLearning.layer.cornerRadius = 8.0
         } else {
             textViewLearning.backgroundColor = .white
             textViewLearning.layer.borderColor = UIColor.white.cgColor

@@ -58,7 +58,8 @@ class QuizViewController: UIViewController {
         for button in buttons {
             button.setupCornerRadius(cornerRadius: 20)
         }
-        cancelButton.layer.cornerRadius = 8
+        cancelButton.layer.cornerRadius = 35 / 2
+        jokerButton.layer.cornerRadius = 35 / 2
         self.navigationController?.isNavigationBarHidden = true
         timerView.layer.cornerRadius = 4
         timerViewWidthConstraint.constant = UIScreen.main.bounds.width - 2 * 40

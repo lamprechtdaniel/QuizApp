@@ -79,7 +79,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="FfN-Ti-tZ4" secondAttribute="trailing" constant="40" id="7Fc-cR-vby"/>
                             <constraint firstItem="Bh6-4S-4Ge" firstAttribute="leading" secondItem="JU3-Yg-WPM" secondAttribute="trailing" constant="-80" id="A7U-V7-ibJ"/>
@@ -255,7 +255,7 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ojL-T7-mkR"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ojL-T7-mkR" firstAttribute="trailing" secondItem="fmD-0A-DRz" secondAttribute="trailing" constant="16" id="319-pf-DJV"/>
                             <constraint firstItem="gE9-5R-2Lr" firstAttribute="leading" secondItem="ojL-T7-mkR" secondAttribute="leading" constant="40" id="7GM-4p-bhg"/>
