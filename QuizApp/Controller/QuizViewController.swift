@@ -90,7 +90,7 @@ class QuizViewController: UIViewController {
             view.layoutIfNeeded()
         }
         
-        questionNoLabel.text = "Question \(questionNo) of \(maxQuestionNo)"
+        questionNoLabel.text = "Frage \(questionNo) von \(maxQuestionNo)"
         questionLabel.text = quiz.questions[questionNo-1].question
         var count = 0
         for answer in quiz.questions[questionNo-1].answers {

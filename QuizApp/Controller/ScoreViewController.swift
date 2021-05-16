@@ -14,6 +14,7 @@ class ScoreViewController: UIViewController {
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var leaderboardTableView: UITableView!
     @IBOutlet weak var leaderboardLabel: UILabel!
+    @IBOutlet weak var tryAgainButton: UIButton!
     
     let tableViewController = LeaderboardTableViewController()
     
@@ -25,6 +26,9 @@ class ScoreViewController: UIViewController {
         super.viewDidLoad()
         
         styleUI()
+        
+        self.leaderboardTableView.delegate = self.tableViewController
+        self.leaderboardTableView.dataSource = self.tableViewController
         
         if let score = score {
             scoreLabel.text = String(score)
@@ -49,6 +53,9 @@ class ScoreViewController: UIViewController {
                 print("update successful")
                 self.fetchData()
             } else {
+                DispatchQueue.main.async {
+                    self.tryAgainButton.isHidden = false
+                }
                 print("update not successful")
             }
             
@@ -67,16 +74,19 @@ class ScoreViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     self.tableViewController.scores = scores
-                    self.leaderboardTableView.delegate = self.tableViewController
-                    self.leaderboardTableView.dataSource = self.tableViewController
-                    self.tableViewController.tableView.reloadData()
+                    self.leaderboardTableView.reloadData()
                     self.leaderboardTableView.isHidden = false
                     self.leaderboardLabel.isHidden = false
+                    if !self.tryAgainButton.isHidden {
+                        self.tryAgainButton.isHidden = true
+                    }
                 }
             } else {
                 // TODO: present failure
             }
         })
-        
+    }
+    @IBAction func onTryAgainTap(_ sender: UIButton) {
+        uploadScore()
     }
 }
