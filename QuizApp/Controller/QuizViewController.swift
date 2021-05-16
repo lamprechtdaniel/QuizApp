@@ -23,7 +23,7 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var timerView: UIView!
     @IBOutlet weak var timerViewWidthConstraint: NSLayoutConstraint!
     
-    
+    private var animator: UIViewPropertyAnimator?
     private var buttons: [UIButton]?
     private var maxQuestionNo: Int?
     public var quiz: Quiz?
@@ -70,7 +70,6 @@ class QuizViewController: UIViewController {
     }
     
     private func fetchQuiz() {
-//        quiz = quizData
         maxQuestionNo = quiz?.questions.count ?? 0
         
         fetchQuestion()
@@ -113,36 +112,30 @@ class QuizViewController: UIViewController {
         
         self.timerView.isHidden = false
         
-        
-        UIView.animate(withDuration: 20.0, delay: 0.0, options: .curveLinear, animations: {
+        animator = UIViewPropertyAnimator(duration: 20.0, curve: .linear, animations: {
             self.timerViewWidthConstraint.constant = 8
             self.timerView.backgroundColor = UIColor.red
-            self.firstAnswerButton.isUserInteractionEnabled = true
             self.view.layoutIfNeeded()
-        }, completion: {
-            finished in
-                if finished {
-                    self.timerView.isHidden = true
-                    self.questionNo += 1
-                }
         })
-        
+        if let animator = animator {
+            animator.addCompletion({ _ in
+                self.timerView.isHidden = true
+                self.questionNo += 1
+            })
+            animator.startAnimation()
+        }
     }
     
     private func moveForward() {
-        timerView.removeAnimation()
-        timerView.layoutIfNeeded()
+        animator?.stopAnimation(true)
         
         view.layoutSubviews()
-        UIView.animate(withDuration: 0.5, animations: {
-            self.timerViewWidthConstraint.constant = UIScreen.main.bounds.size.width - 2 * 40
-            self.timerView.backgroundColor = UIColor.green
-            self.view.layoutIfNeeded()
-        }, completion: { completed in
-            if completed {
-                self.fetchQuestion()
-            }
-        })
+        
+        self.timerViewWidthConstraint.constant = UIScreen.main.bounds.size.width - 2 * 40
+        self.timerView.backgroundColor = UIColor.green
+        self.view.layoutIfNeeded()
+        
+        self.fetchQuestion()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -176,7 +169,7 @@ class QuizViewController: UIViewController {
         timerView.isHidden = true
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.questionNo += 1
+        self.questionNo += 1
         }
     }
     @IBAction func onCancelTap(_ sender: UIButton) {
